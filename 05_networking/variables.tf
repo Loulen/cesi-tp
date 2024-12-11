@@ -7,7 +7,7 @@ variable "region" {
 variable "school" {
   type        = string
   description = "The school name"
-  default     = "cpe"
+  default     = "cesi"
 }
 
 variable "project" {
