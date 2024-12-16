@@ -13,7 +13,7 @@ data "aws_iam_instance_profile" "ssm_instance_profile" {
 #resource "aws_instance" "http_server" {
 #  ami                  = data.aws_ami.amazon_linux_2_ami.id
 #  instance_type        = "t3.small"
-#  iam_instance_profile = data.aws_iam_instance_profile.ssm_instance_profile.name
+#  iam_instance_profile = aws_iam_instance_profile.ssm_instance_profile.name
 #  user_data = templatefile("${path.module}/cloud_init.sh.tpl", {
 #    #variable1 = aws_example.test.endpoint,
 #    #variable2 = aws_example.test2.name,

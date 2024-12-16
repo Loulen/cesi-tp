@@ -1,6 +1,6 @@
-# cpe-tp
+# cesi-tp
 
-Repository containing practical work for Lyon CPE AWS classes.
+Repository containing practical work for Lyon CESI AWS classes.
 
 ## Introduction
 
@@ -11,14 +11,14 @@ For all modules below, here are the first steps:
 4) Still in the network settings, go into "VPC settings" and update the subnet to target `us-east-1a`.
 5) Once in the Cloud9 environment, you can checkout the code:
 ```bash
-git clone https://github.com/ippontech/cpe-tp.git
+git clone https://github.com/ippontech/cesi-tp.git
 ```
 
 ## Module 1 - AWS Cloud Concepts
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/01_cloud_concepts/
+cd cesi-tp/01_cloud_concepts/
 ```
 2) And start working with Terraform:
 ```bash
@@ -43,7 +43,7 @@ S3 bucket in the console and try to update a file from your computer into the bu
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/04_cloud_security/
+cd cesi-tp/04_cloud_security/
 ```
 2) And start working with Terraform:
 ```bash
@@ -98,7 +98,7 @@ In this module we will deploy the following infrastructure:
 1) After you have cloned the git repository, you can go into the module:
 
 ```bash
-cd cpe-tp/05_networking/
+cd cesi-tp/05_networking/
 ```
 
 2) And start working with Terraform:
@@ -154,7 +154,7 @@ You can check that `curl http://ifconfig.io` returns the public IP address of yo
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/06_compute/
+cd cesi-tp/06_compute/
 ```
 
 2) And start working with Terraform to initialize the VPC resources (VPC / subnets / internet gateway / Route tables / NAT...):
@@ -198,12 +198,12 @@ click on the instance and choose "Connect". This will bring you to a new "Connec
 7) Create an SSH key pair on the Cloud9 instance (and not the bastion instance previously accessed through AWS System
  Manager) by using the following command:
 ```bash
-ssh-keygen -f bastion_cpe_key 
+ssh-keygen -f bastion_cesi_key 
 ```
 When asked to enter a passphrase, leave it empty.
 
 8) Now that you have an SSH key pair, you can import the public key into AWS with `aws_key_pair` resource. You will have
-to fill in a `key_name` and the `public_key` with the content of the file `bastion_cpe_key.pub` created in step 7.
+to fill in a `key_name` and the `public_key` with the content of the file `bastion_cesi_key.pub` created in step 7.
 
 9) Now that you have created the `aws_key_pair`, you must associate it to your `aws_instance` with the argument
 `key_name`.
@@ -224,7 +224,7 @@ export BASTION_IP=$(aws --region us-east-1 ec2 describe-instances \
     "Name=tag:Project,Values=06-compute" \
     --query 'Reservations[*].Instances[*].[PublicIpAddress]' \
     --output text)
-ssh -i bastion_cpe_key ec2-user@${BASTION_IP}
+ssh -i bastion_cesi_key ec2-user@${BASTION_IP}
 ```
 
 13) Create another EC2 instance (with Terraform of course) named `web-server` in one of the private subnets.
@@ -236,7 +236,7 @@ created earlier with the `-L` option to create a secured SSH tunnel to access yo
 
 To be able to access the HTTPD server on your private instance from Cloud9, you can do:
 ```bash
-ssh -i bastion_cpe_key ec2-user@${BASTION_IP} -L 8080:${PRIVATE_WEB_SERVER_IP}:80
+ssh -i bastion_cesi_key ec2-user@${BASTION_IP} -L 8080:${PRIVATE_WEB_SERVER_IP}:80
 ```
 
 In Cloud9, you should now be able to access the HTTPD home page by clicking on "Preview" then "Preview Running
@@ -246,7 +246,7 @@ Application" at the top of your screen.
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/06_container/
+cd cesi-tp/06_container/
 ```
 
 2) You have been provided a file named `Dockerfile` which describes what you will install in your Docker image. A
@@ -256,7 +256,7 @@ want to use.
 
 3) Build your Docker image with the following command in your Cloud9 terminal:
 ```bash
-docker build -t nginx-cpe:latest .
+docker build -t nginx-cesi:latest .
 ```
 
 4) Search for documentation on [Docker site](https://docs.docker.com/engine/reference/commandline/run/) on how
@@ -292,7 +292,7 @@ the second S3 bucket.
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/07_storage/
+cd cesi-tp/07_storage/
 ```
 
 2) Unfortunately, you won't be able to use Terraform to create an S3 bucket because of IAM restrictions on
@@ -303,8 +303,8 @@ cd cpe-tp/07_storage/
    current date, etc...).
 
 For instance, your buckets could be called:
-* `taufort-06042022-source`
-* `taufort-06042022-target`
+* `ysimiandcossin-17122024-source`
+* `ysimiandcossin-17122024-target`
 
 From now on, let's call the first bucket the `source` bucket and the second bucket the `target` bucket.
 
@@ -375,7 +375,7 @@ instance.
 
 1) After you have cloned the git repository, you can go into the module:
 ```bash
-cd cpe-tp/08_databases/
+cd cesi-tp/08_databases/
 ```
 
 2) You can apply the Terraform code to create the base resources:
@@ -444,7 +444,7 @@ in [the AWS Terraform provider documentation](https://registry.terraform.io/prov
 1) After you have cloned the git repository, you can go into the module:
 
 ```bash
-cd cpe-tp/09
+cd cesi-tp/09
 ```
 
 2) As you can see, you don't have any file. You will have to deploy all from scratch. To start, let's create a VPC with

@@ -5,7 +5,7 @@ variable "region" {
 
 variable "school" {
   type    = string
-  default = "cpe"
+  default = "cesi"
 }
 
 variable "project" {
@@ -16,10 +16,10 @@ variable "project" {
 # TODO: update the S3 bucket names below with your bucket names
 variable "bucket_source" {
   type    = string
-  default = "taufort-06042022-source"
+  default = "ysimiandcossin-17122024-source"
 }
 
 variable "bucket_target" {
   type    = string
-  default = "taufort-06042022-target"
+  default = "ysimiandcossin-17122024-target"
 }

@@ -38,7 +38,7 @@ resource "aws_instance" "web_server" {
   ami                    = data.aws_ami.amazon_linux_2_ami.id
   instance_type          = "t3.small"
   subnet_id              = var.private_subnets[0]
-  iam_instance_profile   = data.aws_iam_instance_profile.ssm_instance_profile.name
+  iam_instance_profile   = aws_iam_instance_profile.ssm_instance_profile.name
   vpc_security_group_ids = [aws_security_group.web_server_security_group.id]
 
   user_data = file("${path.module}/userdata.tpl")
