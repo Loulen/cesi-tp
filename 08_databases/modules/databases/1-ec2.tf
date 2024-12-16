@@ -4,35 +4,8 @@ data "aws_ami" "amazon_linux_2_ami" {
   owners      = ["amazon"]
 }
 
-# data "aws_iam_instance_profile" "ssm_instance_profile" {
-#   name = "LabInstanceProfile"
-# }
-
-resource "aws_iam_instance_profile" "ssm_instance_profile" {
-  name = "${var.project}-instance-profile"
-  role = aws_iam_role.ssm_role.name
-}
-
-resource "aws_iam_role" "ssm_role" {
-  name = "${var.project}-instance-role"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        },
-        Action = "sts:AssumeRole"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "ssm_attach" {
-  role       = aws_iam_role.ssm_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+data "aws_iam_instance_profile" "ssm_instance_profile" {
+  name = "LabInstanceProfile"
 }
 
 # TODO STEP 7: Choose a subnet for your instance, add a Security Group to it and complete the user data to pass the right variables to it.
